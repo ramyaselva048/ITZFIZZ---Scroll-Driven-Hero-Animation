@@ -57,18 +57,22 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.service-card', {
-        opacity: 0,
-        y: 40,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(
+        '.service-card',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.7,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

@@ -57,18 +57,22 @@ export const Process: React.FC = () => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.process-step-card', {
-        opacity: 0,
-        y: 50,
-        stagger: 0.18,
-        duration: 0.85,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: stepsWrapperRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(
+        '.process-step-card',
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          duration: 0.75,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

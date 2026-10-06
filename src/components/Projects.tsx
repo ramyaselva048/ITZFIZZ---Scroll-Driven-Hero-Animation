@@ -84,18 +84,22 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from('.project-card', {
-        opacity: 0,
-        y: 50,
-        stagger: 0.2,
-        duration: 0.9,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(
+        '.project-card',
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          duration: 0.75,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

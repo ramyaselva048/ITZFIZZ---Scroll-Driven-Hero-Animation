@@ -19,28 +19,38 @@ export const About: React.FC<AboutProps> = ({ onOpenContact }) => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(contentRef.current, {
-        opacity: 0,
-        x: -40,
-        duration: 0.9,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(
+        contentRef.current,
+        { opacity: 0, x: -35 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
 
-      gsap.from(visualRef.current, {
-        opacity: 0,
-        x: 40,
-        duration: 0.9,
-        delay: 0.15,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 75%',
-          toggleActions: 'play none none reverse',
-        },
-      });
+      gsap.fromTo(
+        visualRef.current,
+        { opacity: 0, x: 35 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          delay: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();

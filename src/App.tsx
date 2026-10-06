@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Navbar } from './components/Navbar.tsx';
+
+gsap.registerPlugin(ScrollTrigger);
 import { Hero } from './components/Hero.tsx';
 import { About } from './components/About.tsx';
 import { Services } from './components/Services.tsx';
@@ -15,6 +19,14 @@ export default function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('Web Development');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+
+  useEffect(() => {
+    // Ensure all ScrollTrigger elements recalculate properly after fonts/layout settle
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenContactWithService = (serviceName?: string) => {
     if (serviceName) {
