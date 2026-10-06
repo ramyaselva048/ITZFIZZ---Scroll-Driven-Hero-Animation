@@ -74,7 +74,32 @@ Ensure you have [Node.js](https://nodejs.org/) (v18 or higher) installed on your
 
 4. Open your browser and navigate to `http://localhost:3000` (or the port indicated in your terminal).
 
-## Deployment to GitHub Pages
+## Deployment to Render (Recommended for Full-Stack & MySQL)
+
+Since this project features an Express backend for MySQL database storage and API endpoints along with the React Vite frontend, **Render Web Service** is the recommended deployment platform.
+
+### Step-by-Step Render Deployment:
+
+1. Push your project to **GitHub**.
+2. Go to [Render Dashboard](https://dashboard.render.com/) and click **New +** > **Web Service**.
+3. Connect your GitHub repository.
+4. Fill in the exact settings:
+   - **Name**: `itzfizz-agency` (or your choice)
+   - **Region**: `Singapore (Southeast Asia)` (matches TiDB Cloud region for fastest response)
+   - **Branch**: `main`
+   - **Runtime**: `Node`
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm run start`
+   - **Instance Type**: `Free`
+5. In **Environment Variables** (Advanced / Environment), add:
+   - `NODE_ENV` = `production`
+   - `DATABASE_URL` = `mysql://rHUHLpc64mrScvX.root:1hCYJl9CIr8XAqNv@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/itzfizz`
+6. Click **Deploy Web Service**.
+7. Once deployed, Render will provide your live URL (e.g., `https://itzfizz-agency.onrender.com`).
+
+---
+
+## Deployment to GitHub Pages (Static Mode)
 
 This project is pre-configured with a relative base path (`base: './'` in `vite.config.ts`), making it directly compatible with GitHub Pages hosting under any repository name.
 
